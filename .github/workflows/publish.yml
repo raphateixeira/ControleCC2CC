@@ -15,4 +15,4 @@ jobs:
     with:
       needs_python: true
       python_packages: "jupyter pyyaml pandas numpy matplotlib"
-      output_dir: "docs"
+      output_dir: "_site"
