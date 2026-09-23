@@ -1,19 +1,14 @@
-# IC-DataDrive
+# ControleCC2CC
 
-🔗 Site: https://raphateixeira.github.io/IC-DataDrive/
+Repositório do plano de Iniciação Científica **"Identificação e Controle Clássico Linear e
+Baseado em Dados de Conversores CC-CC Buck, Boost e Buck-Boost"** — Luiz Felipe Souza de
+Lima Silva, orientação do Prof. Dr. Raphael Barros Teixeira (UFPA-CAMTUC-FEE).
 
-Iniciação científica em processamento de energia / eletrônica de potência:
+Ver [Plano de Trabalho](Plano/PlanoIC02.pdf) para objetivos, metodologia e cronograma
+completos.
 
-- CA - CC
+Organizado em uma pasta por etapa do plano: `Plano/`, `Fundamentacao/`, `Bancada/`,
+`Modelagem/`, `Identificacao/`, `Controle/`. A pasta `IdentificacaoMotorGerador/` guarda o
+trabalho exploratório anterior a este plano (identificação de uma bancada motor-gerador).
 
-- SISTEMA1: CC - CC: Tensão CC de 10V e converte para uma tensão CC de 6V; 
-
-- SISTEMA2:CC - CA: (Inversor): Tensão 100V (CC) converter para Tensão CA 80V de amplitude;
-
-- MODELO: Identificação do modelo; Sistemas chaveados;
-- Identificação -> Dados: Sistema real ou simular o modelo;
-
-- CONTROLE: Linear PID, MPC (Model Predictive Control);
-
-
-- CA - CA
+🔗 Site: https://raphateixeira.github.io/ControleCC2CC/

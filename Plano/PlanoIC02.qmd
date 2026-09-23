@@ -1,0 +1,117 @@
+---
+title: "Plano de Trabalho de Iniciação Científica"
+subtitle: "Identificação e Controle Clássico Linear e Baseado em Dados de Conversores CC-CC Buck, Boost e Buck-Boost"
+author: "Luiz Felipe Souza de Lima Silva"
+lang: pt-BR
+---
+
+| Campo | Informação |
+|---|---|
+| Aluno(a) | Luiz Felipe Souza de Lima Silva |
+| Curso | Engenharia Elétrica |
+| Orientador | Prof. Dr. Raphael Barros Teixeira |
+| Unidade | Faculdade de Engenharia Elétrica – Campus Universitário de Tucuruí (UFPA) |
+| Projeto de pesquisa vinculado | Identificação, Estimação e Controle Baseados em Dados e Inteligência Computacional Aplicados a Conversores de Potência e Acionamentos Elétricos |
+| Período de execução | 12 meses |
+| Carga horária | 20 horas semanais |
+
+::: {.callout-note}
+Documento original (PDF assinado): [`PlanoIC02.pdf`](PlanoIC02.pdf).
+:::
+
+## Resumo
+
+Este plano de trabalho propõe o estudo, a modelagem, a identificação de sistemas e o controle de três topologias de conversores CC-CC — Buck, Boost e Buck-Boost — implementadas sobre uma plataforma comercial de controle digital da Texas Instruments, composta pelo kit de desenvolvimento LAUNCHXL-F28379D (microcontrolador de sinais digitais Delfino de duplo núcleo), pela BoosterPack conversora BOOSTXL-BUCKCONV para a topologia Buck, e pelos módulos de acionamento de chaves (gate drivers) DRV8323RS e DRV8320RS para a montagem dos estágios de potência Boost e Buck-Boost. Serão aplicadas técnicas clássicas lineares de identificação — mínimos quadrados convencionais (MQC) e recursivos (MQR) — para obtenção de modelos entre a razão cíclica e a tensão de saída de cada conversor, e serão projetados, simulados e implementados de forma embarcada controladores clássicos (PI) e controladores baseados em dados — controle preditivo baseado em modelo (MPC) e controle preditivo direto por dados (DeePC).
+
+## Introdução e Justificativa
+
+Os conversores CC-CC Buck, Boost e Buck-Boost constituem o conjunto fundamental de topologias não isoladas da eletrônica de potência. Embora compartilhem princípios de operação semelhantes — comutação em alta frequência, armazenamento de energia em elemento indutivo e filtragem capacitiva —, cada topologia apresenta características dinâmicas distintas: o conversor Boost e o conversor Buck-Boost exibem função de transferência de fase não mínima entre razão cíclica e tensão de saída, o que impõe desafios de controle não presentes no conversor Buck. O estudo comparativo das três topologias, sob um mesmo arcabouço de identificação e controle, permite avaliar a generalidade e os limites de aplicação das técnicas investigadas.
+
+A adoção de uma plataforma comercial validada — o kit LAUNCHXL-F28379D (TMS320F28379D, duplo núcleo), a BoosterPack BOOSTXL-BUCKCONV (estágio Buck já validado, com sensoriamento integrado) e os gate drivers DRV8323RS/DRV8320RS (para os estágios Boost e Buck-Boost a montar) — concentra o esforço de pesquisa nas etapas de identificação e controle, reduzindo os riscos e o tempo associados ao desenvolvimento de hardware dedicado.
+
+Do ponto de vista de controle e identificação, o plano articula duas frentes complementares: uma clássica linear (mínimos quadrados MQC/MQR entre razão cíclica e tensão de saída, e controladores PI de referência de desempenho) e uma baseada em dados (MPC, incorporando restrições de razão cíclica e de corrente no indutor; e DeePC, que dispensa a etapa de identificação explícita).
+
+## Objetivos
+
+### Objetivo Geral
+
+Investigar a identificação de sistemas por métodos clássicos lineares e o controle clássico e baseado em dados dos conversores CC-CC Buck, Boost e Buck-Boost, implementados sobre a plataforma comercial de controle digital Texas Instruments LAUNCHXL-F28379D, com estágios de potência BOOSTXL-BUCKCONV (Buck) e acionamento por gate drivers DRV8323RS/DRV8320RS (Boost e Buck-Boost).
+
+### Objetivos Específicos
+
+- Estudar os fundamentos teóricos dos conversores CC-CC Buck, Boost e Buck-Boost, incluindo modos de condução contínua e descontínua, e o princípio de modulação por largura de pulso digital;
+- Estudar a arquitetura da plataforma LAUNCHXL-F28379D (TMS320F28379D), incluindo PWM de alta resolução (ePWM/HRPWM), conversão analógico-digital e recursos de processamento em tempo real, e o ambiente Code Composer Studio;
+- Estudar o funcionamento da BoosterPack BOOSTXL-BUCKCONV e configurá-la para operação com o conversor Buck sobre a plataforma LAUNCHXL-F28379D;
+- Estudar o funcionamento dos módulos de gate driver DRV8323RS e DRV8320RS e projetar, dimensionar e montar os estágios de potência dos conversores Boost e Buck-Boost;
+- Derivar os modelos de pequenos sinais das três topologias pela técnica de média no espaço de estados, obtendo as funções de transferência entre razão cíclica e tensão de saída;
+- Simular as três topologias no ambiente MATLAB/Simulink, validando o comportamento estático e dinâmico em malha aberta e malha fechada, com geração de dados para identificação;
+- Aplicar técnicas de identificação por mínimos quadrados convencionais (MQC) e recursivos (MQR) sobre as três plantas físicas, obtendo modelos ARX entre razão cíclica e tensão de saída, e validá-los frente aos modelos analíticos;
+- Projetar e implementar, de forma embarcada, controladores PI para regulação de tensão de saída das três topologias, com ajuste por alocação de polos e validação experimental;
+- Projetar e implementar controladores preditivos baseados em modelo (MPC), a partir dos modelos ARX identificados, incorporando restrições de razão cíclica e de corrente no indutor;
+- Projetar e implementar controladores preditivos diretos por dados (DeePC), avaliando a viabilidade de dispensa da etapa de identificação explícita nas três topologias;
+- Comparar experimentalmente o desempenho das estratégias PI, MPC e DeePC nas três topologias quanto a tempo de acomodação, sobressinal, erro em regime permanente e rejeição a perturbações de carga;
+- Elaborar relatórios técnicos parciais e final, e produzir material para eventual submissão a evento científico ou periódico.
+
+## Metodologia
+
+O plano de trabalho será executado em oito etapas ao longo de 12 meses.
+
+### Etapa 1 — Revisão bibliográfica e fundamentação teórica
+
+Estudo dos fundamentos de operação dos conversores CC-CC Buck, Boost e Buck-Boost, dos modos de condução contínua e descontínua, e da modulação por largura de pulso digital. Estudo da arquitetura da plataforma C2000 Delfino (TMS320F28379D) e de seus periféricos relevantes (ePWM/HRPWM, ADC, CLA).
+
+### Etapa 2 — Familiarização com a plataforma de desenvolvimento
+
+Configuração do Code Composer Studio (ou suporte C2000 do MATLAB/Simulink Embedded Coder) para o kit LAUNCHXL-F28379D. Implementação de rotinas básicas de geração de PWM, leitura de ADC e comunicação serial para aquisição de dados em tempo real.
+
+### Etapa 3 — Montagem das bancadas físicas dos três conversores
+
+Configuração da BoosterPack BOOSTXL-BUCKCONV para o conversor Buck. Projeto analítico, dimensionamento e montagem dos estágios de potência dos conversores Boost e Buck-Boost, acionados pelos gate drivers DRV8323RS e DRV8320RS, com sensoriamento de tensão de saída e de corrente no indutor. Caracterização estática e dinâmica das três bancadas em malha aberta.
+
+### Etapa 4 — Modelagem analítica e simulação computacional
+
+Derivação do modelo de pequenos sinais de cada topologia por média no espaço de estados. Construção dos modelos de simulação das três topologias no MATLAB/Simulink (Simscape Electrical), com validação em malha aberta e geração de dados para identificação.
+
+### Etapa 5 — Identificação de sistemas
+
+Aplicação de sinais de excitação (PRBS ou degraus) na razão cíclica de cada conversor, com aquisição da tensão de saída para identificação por MQC, obtendo modelos ARX de baixa ordem. Aplicação de MQR com fator de esquecimento variável. Validação cruzada frente aos modelos analíticos da Etapa 4.
+
+### Etapa 6 — Projeto e implementação do controle clássico (PI)
+
+Projeto de controladores PI para a malha de tensão das três topologias, por alocação de polos. Implementação embarcada e validação experimental em malha fechada, como referência de desempenho.
+
+### Etapa 7 — Projeto e implementação do controle baseado em dados (MPC e DeePC)
+
+Projeto de controladores MPC com horizonte de predição finito, a partir dos modelos ARX da Etapa 5, incorporando restrições de razão cíclica e de corrente máxima no indutor. Projeto de controladores DeePC, construídos diretamente a partir de trajetórias de entrada e saída medidas, sem modelo explícito. Implementação embarcada e testes experimentais em malha fechada nas três topologias.
+
+### Etapa 8 — Análise comparativa de resultados e redação
+
+Comparação experimental do desempenho das estratégias PI, MPC e DeePC nas três topologias, quanto a tempo de acomodação, sobressinal, erro em regime permanente e rejeição a perturbações de carga. Consolidação dos resultados e redação do relatório técnico final.
+
+## Ferramentas computacionais e plataforma de hardware
+
+- **Plataforma de controle digital**: kit Texas Instruments LAUNCHXL-F28379D (TMS320F28379D, duplo núcleo);
+- **Estágio de potência Buck**: BoosterPack Texas Instruments BOOSTXL-BUCKCONV;
+- **Acionamento das chaves (Boost e Buck-Boost)**: módulos de gate driver Texas Instruments DRV8323RS e DRV8320RS;
+- **Ambiente de desenvolvimento embarcado**: Code Composer Studio e/ou MATLAB/Simulink com suporte C2000 (Embedded Coder);
+- **Simulação e projeto de controladores**: MATLAB/Simulink (Control System Toolbox, Model Predictive Control Toolbox, Simscape Electrical);
+- **Apoio à identificação de sistemas e análise de dados**: Python (numpy, scipy, matplotlib, python-control).
+
+## Resultados Esperados
+
+Ao final da execução deste plano: (i) três bancadas físicas funcionais dos conversores Buck, Boost e Buck-Boost sobre a plataforma LAUNCHXL-F28379D; (ii) modelos dinâmicos identificados experimentalmente entre razão cíclica e tensão de saída para as três topologias; (iii) controladores PI, MPC e DeePC projetados, implementados de forma embarcada e validados experimentalmente, com avaliação comparativa de desempenho; (iv) relatório técnico final e material para submissão a evento científico ou periódico.
+
+## Referências
+
+- Aguirre, L. A. *Introdução à Identificação de Sistemas*. 4ª ed. Editora UFMG, 2015.
+- Camacho, E. F.; Bordons, C. *Model Predictive Control*. 2ª ed. Springer, 2007.
+- Coulson, J.; Lygeros, J.; Dörfler, F. Data-enabled predictive control: In the shallows of the DeePC. *ECC*, 2019.
+- Erickson, R. W.; Maksimović, D. *Fundamentals of Power Electronics*. 3ª ed. Springer, 2020.
+- Ljung, L. *System Identification: Theory for the User*. Prentice Hall, 1999.
+- Mohan, N.; Undeland, T. M.; Robbins, W. P. *Power Electronics: Converters, Applications, and Design*. 3ª ed. Wiley, 2003.
+- Texas Instruments. *TMS320F28379D Dual-Core Delfino Microcontroller — Data Manual*.
+- Texas Instruments. *LAUNCHXL-F28379D — C2000 Delfino LaunchPad Development Kit — User's Guide*.
+- Texas Instruments. *BOOSTXL-BUCKCONV — Buck Converter BoosterPack — User's Guide*.
+- Texas Instruments. *DRV8323R — Automotive, 100-V Three-Phase Smart Gate Driver — Datasheet*.
+- Texas Instruments. *DRV8320R — Automotive, 100-V Three-Phase Gate Driver — Datasheet*.
+- Texas Instruments. *DRV8323RS-EVM / DRV8320RS-EVM — User's Guide*.

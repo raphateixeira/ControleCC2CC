@@ -3,12 +3,13 @@ project:
   output-dir: docs
   render:
     - index.qmd
-    - "Motor Gerador Indentificação.ipynb"
+    - Plano/PlanoIC02.qmd
+    - "IdentificacaoMotorGerador/Motor Gerador Indentificação.ipynb"
 
 website:
-  title: "IC - Controle Orientado a Dados"
-  site-url: https://raphateixeira.github.io/IC-DataDrive/
-  repo-url: https://github.com/raphateixeira/IC-DataDrive
+  title: "Controle de Conversores CC-CC"
+  site-url: https://raphateixeira.github.io/ControleCC2CC/
+  repo-url: https://github.com/raphateixeira/ControleCC2CC
 
 format:
   html:

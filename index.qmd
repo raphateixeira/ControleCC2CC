@@ -1,25 +1,57 @@
 ---
-title: "Iniciação Científica — Controle Orientado a Dados"
-subtitle: "Identificação e controle de conversores de potência"
-author: "Prof. Dr. Raphael Teixeira"
+title: "Controle de Conversores CC-CC"
+subtitle: "Identificação e Controle Clássico Linear e Baseado em Dados de Conversores CC-CC Buck, Boost e Buck-Boost"
+author:
+  - "Luiz Felipe Souza de Lima Silva"
+  - "Orientador: Prof. Dr. Raphael Barros Teixeira"
 ---
 
-Iniciação científica em eletrônica de potência e controle orientado a dados:
-identificação e controle (PID, MPC) de conversores CC-CC, CC-CA e CA-CA a
-partir de dados experimentais de bancada motor-gerador.
+Repositório de acompanhamento do plano de Iniciação Científica **"Identificação e Controle
+Clássico Linear e Baseado em Dados de Conversores CC-CC Buck, Boost e Buck-Boost"** (Luiz
+Felipe Souza de Lima Silva, orientação do Prof. Dr. Raphael Barros Teixeira), vinculado ao
+projeto de pesquisa *Identificação, Estimação e Controle Baseados em Dados e Inteligência
+Computacional Aplicados a Conversores de Potência e Acionamentos Elétricos*.
+
+As três topologias — Buck, Boost e Buck-Boost — são implementadas sobre a plataforma
+comercial Texas Instruments LAUNCHXL-F28379D, com estágio de potência Buck na BoosterPack
+BOOSTXL-BUCKCONV e estágios Boost/Buck-Boost acionados pelos gate drivers
+DRV8323RS/DRV8320RS.
+
+## Plano de Trabalho
+
+* [Plano de Trabalho de IC](Plano/PlanoIC02.html) — objetivos, metodologia (8 etapas) e cronograma de 12 meses. ([PDF assinado](Plano/PlanoIC02.pdf))
+
+## Pré-requisitos
+
+- Eletrônica de Potência I e II (conversores CC-CC);
+- Sistemas de Controle I;
+- Identificação de Sistemas (mínimos quadrados);
+- Programação em C/C++ (Code Composer Studio, C2000) e Python/MATLAB para identificação e controle.
 
 ## Conteúdo
 
-* [Identificação de motor-gerador por mínimos quadrados](Motor%20Gerador%20Indentifica%C3%A7%C3%A3o.html) — modelo ARX $y(t) = ay(t-1) + bu(t-1)$ estimado via mínimos quadrados.
+### Fundamentação
 
-## Scripts de suporte
+::: {.callout-note}
+Etapas 1–2 do plano (revisão bibliográfica e familiarização com a plataforma
+LAUNCHXL-F28379D) ainda não iniciadas.
+:::
 
-* `ColetaPRBS.py` — coleta de sinais PRBS para identificação.
-* `conversãocsv.py` — conversão de dados coletados para CSV.
+### Bancada, Modelagem, Identificação e Controle
+
+::: {.callout-note}
+Etapas 3–8 do plano (montagem das três bancadas, modelagem e simulação, identificação por
+MQC/MQR e controladores PI/MPC/DeePC) ainda não iniciadas — serão adicionadas aqui
+conforme o andamento do IC.
+:::
+
+### Trabalho anterior: identificação motor-gerador
+
+* [Identificação de motor-gerador por mínimos quadrados](IdentificacaoMotorGerador/Motor%20Gerador%20Indentifica%C3%A7%C3%A3o.html) — modelo ARX $y(t) = ay(t-1) + bu(t-1)$ estimado via mínimos quadrados, trabalho exploratório anterior a este plano de IC.
 
 ## Ver também
 
 * [Identificacao](https://raphateixeira.github.io/Identificacao/) — fundamentos teóricos usados aqui: projeto de sinais PRBS, persistência de excitação e identificação ARX por mínimos quadrados.
-* [Projeto-Aeropendulo](https://raphateixeira.github.io/Projeto-Aeropendulo/) — mesma metodologia (PRBS + ARX por mínimos quadrados) aplicada a outra planta.
+* [ControleBuck](https://raphateixeira.github.io/ControleBuck/) — mesma metodologia (identificação + PI/MPC) aplicada ao conversor Buck de uma fonte CC controlada.
 * [ControleDFIG](https://raphateixeira.github.io/ControleDFIG/) — identificação ARX aplicada a um sistema trifásico, como etapa de um controle preditivo (FCS-MPC).
 * [DataDrivenControl](https://raphateixeira.github.io/DataDrivenControl/) — próximo passo: controle direto sobre dados (DeePC) sem passar por um modelo ARX explícito.
